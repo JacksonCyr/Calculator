@@ -28,7 +28,7 @@ namespace Calculator
 
             List<String> e = o.Split().ToList();
 
-            
+            pemdas(e);
 
         }
 
@@ -44,6 +44,54 @@ namespace Calculator
 
         public List<String> pemdas(List<String> a)
         {
+
+            int parCount = a.Count(f => f == "(");
+
+            int curPar = 0;
+
+            int start = 0;
+            int end = 0;
+
+            List<String> sub = new List<String>();
+
+            for (int i = 0; i < a.Count; i++)
+            {
+                if (a[i] == "(")
+                {
+
+                    curPar += 1;
+                    if (curPar == parCount) 
+                    {
+                        
+                        start = i;
+                        for (int j = i; j < a.Count; j++)
+                        {
+                            if (a[j] == ")") 
+                            {
+                                end = j;
+                            }
+                        }
+                        for (int y = start + 1; y < end + 1; y++)
+                        {
+                            sub.Add(a[y]);
+                        }
+                    }
+                }
+
+            }
+
+            
+
+
+            for (int u = 0; u < sub.Count - 1; u++)
+            {
+                Console.WriteLine(sub[u]);
+            }
+
+            return new List<String>();
+
+
+            /*
             int bread = 0;
             while (a.Contains("(") && bread == 0)
             {
@@ -69,7 +117,7 @@ namespace Calculator
 
             }
             exponents(a).ForEach(Console.WriteLine);
-            return exponents(a);
+            return exponents(a);*/
         }
 
         public List<String> exponents(List<String> a)
